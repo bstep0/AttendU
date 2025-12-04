@@ -1,8 +1,8 @@
 # <span style="color:#00853E;">AttendU – User Manual</span>
 
 **Team:** Group 3  
-**Date:** October 25th, 2025  
-**Version:** 1.0
+**Date:** December 4th, 2025  
+**Version:** 2.0
 &nbsp;
 ## <span style="color:#00853E;"> Introduction</span>
 AttendU is a web application that we’ve designed to make the attendance-taking process more efficient. It uses facial recognition to identify and verify a student, then accurately records their attendance in real time. The system provides intuitive and functional dashboards for students, instructors, and administrators.  
