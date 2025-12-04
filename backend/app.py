@@ -1321,7 +1321,7 @@ def admin_create_user():
                 "message": "Email already exists in Firebase Auth.",
             }
         ), 409
-    except Exception as exc:  # defensive
+    except Exception as exc:  
         app.logger.exception("Failed to create auth user")
         return jsonify(
             {"status": "error", "message": str(exc)}
@@ -1333,99 +1333,144 @@ def export_attendance():
     if request.method == "OPTIONS":
         return "", 200
 
-    auth_header = request.headers.get("Authorization", "")
-    if not auth_header.startswith("Bearer "):
-        return jsonify({"status": "rejected", "message": "Missing or invalid Authorization header."}), 401
+    class_id = request.args.get("classId") or request.args.get("classID")
+    start_str = request.args.get("startDate")
+    end_str = request.args.get("endDate")
 
-    token = auth_header.split(" ", 1)[1].strip()
-
-    try:
-        firebase_auth.verify_id_token(token)
-    except firebase_auth.InvalidIdTokenError:
-        return jsonify({"status": "rejected", "message": "Invalid authentication token."}), 401
-    except firebase_auth.ExpiredIdTokenError:
-        return jsonify({"status": "rejected", "message": "Authentication token has expired."}), 401
-    except firebase_auth.RevokedIdTokenError:
-        return jsonify({"status": "rejected", "message": "Authentication token has been revoked."}), 401
-    except Exception:
-        return jsonify({"status": "rejected", "message": "Unable to verify authentication token."}), 401
-
-    class_id = request.args.get("classId")
-    start_date_str = request.args.get("startDate")
-    end_date_str = request.args.get("endDate")
-
-    if not class_id or not start_date_str or not end_date_str:
-        return jsonify({"status": "rejected", "message": "classId, startDate, and endDate are required."}), 400
+    if not class_id or not start_str or not end_str:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Missing required query params: classId, startDate, endDate.",
+                }
+            ),
+            400,
+        )
 
     try:
-        start_date = datetime.date.fromisoformat(start_date_str)
-        end_date = datetime.date.fromisoformat(end_date_str)
+        start_date = datetime.date.fromisoformat(start_str)
+        end_date = datetime.date.fromisoformat(end_str)
     except ValueError:
-        return jsonify({"status": "rejected", "message": "Invalid date format. Use YYYY-MM-DD."}), 400
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "startDate and endDate must be in YYYY-MM-DD format.",
+                }
+            ),
+            400,
+        )
 
-    if start_date > end_date:
-        return jsonify({"status": "rejected", "message": "startDate must be on or before endDate."}), 400
+    if end_date < start_date:
+        start_date, end_date = end_date, start_date
+
+    start_dt = datetime.datetime(
+        start_date.year, start_date.month, start_date.day, 0, 0, 0, tzinfo=CENTRAL_TZ
+    )
+    end_dt = datetime.datetime(
+        end_date.year, end_date.month, end_date.day, 23, 59, 59, tzinfo=CENTRAL_TZ
+    )
+
+    attendance_collection = _get_attendance_collection()
+    snapshots = []
+    seen_ids = set()
+
+    for class_field in ("classID", "classId"):
+        try:
+            q = attendance_collection.where(class_field, "==", class_id)
+            for snap in q.stream():
+                if getattr(snap, "exists", False) and snap.id not in seen_ids:
+                    snapshots.append(snap)
+                    seen_ids.add(snap.id)
+        except Exception as exc:
+            app.logger.warning(
+                "Attendance export query failed on field %s for class %s: %s",
+                class_field, class_id, exc
+            )
+
+    def _in_range(record):
+        date_val = record.get("date") or record.get("scanTimestamp")
+        if not isinstance(date_val, datetime.datetime):
+            return False
+        dt_central = date_val.astimezone(CENTRAL_TZ)
+        return start_dt <= dt_central <= end_dt
+
+    filtered = []
+    for snap in snapshots:
+        d = snap.to_dict() or {}
+        if _in_range(d):
+            filtered.append((snap.id, d))
 
     def generate_csv():
         output = io.StringIO()
         writer = csv.writer(output)
-        writer.writerow([
-            "Record ID",
-            "Student ID",
-            "Class ID",
-            "Status",
-            "Date",
-            "Rejection Reason",
-        ])
+
+        writer.writerow(
+            [
+                "Record ID",
+                "Student ID",
+                "Student Name",
+                "Class ID",
+                "Date",
+                "Status",
+                "Decision Method",
+            ]
+        )
         yield output.getvalue()
         output.seek(0)
         output.truncate(0)
 
-        seen_ids = set()
-        for snapshot in _stream_attendance_for_class(class_id):
-            if not getattr(snapshot, "exists", False):
-                continue
+        for snap_id, rec in filtered:
+            student_id = (
+                rec.get("studentID")
+                or rec.get("studentId")
+                or rec.get("student_id")
+                or ""
+            )
+            student_name = (
+                rec.get("studentFullName")
+                or rec.get("studentName")
+                or student_id
+            )
 
-            record = snapshot.to_dict() or {}
+            date_value = rec.get("date") or rec.get("scanTimestamp")
+            if isinstance(date_value, datetime.datetime):
+                central = date_value.astimezone(CENTRAL_TZ)
+                date_str = central.strftime("%Y-%m-%d %I:%M %p")
+            else:
+                date_str = ""
 
-            date_value = record.get("date") or record.get("scanTimestamp")
-            dt = _extract_datetime(date_value)
-            if dt is None:
-                continue
-
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=datetime.timezone.utc)
-
-            record_date = dt.astimezone(CENTRAL_TZ).date()
-            if record_date < start_date or record_date > end_date:
-                continue
-
-            if snapshot.id in seen_ids:
-                continue
-            seen_ids.add(snapshot.id)
+            status = rec.get("status") or rec.get("scanStatus") or ""
+            decision_method = rec.get("decisionMethod") or ""
 
             writer.writerow(
                 [
-                    snapshot.id,
-                    record.get("studentID") or record.get("studentId") or "",
-                    record.get("classID") or record.get("classId") or "",
-                    record.get("status") or record.get("scanStatus") or "",
-                    _to_central_iso(dt) or "",
-                    record.get("rejectionReason") or "",
+                    snap_id,
+                    student_id,
+                    student_name,
+                    class_id,
+                    date_str,
+                    status,
+                    decision_method,
                 ]
             )
+
             yield output.getvalue()
             output.seek(0)
             output.truncate(0)
 
-    filename = f"attendance-{class_id}-{start_date_str}-to-{end_date_str}.csv"
-    headers = {"Content-Disposition": f"attachment; filename=\"{filename}\""}
+    filename = f"attendance-{class_id}-{start_str}-to-{end_str}.csv"
+    headers = {
+        "Content-Disposition": f'attachment; filename="{filename}"'
+    }
 
     return Response(
         stream_with_context(generate_csv()),
         mimetype="text/csv",
         headers=headers,
     )
+
 
 
 def _process_face_recognition_request():

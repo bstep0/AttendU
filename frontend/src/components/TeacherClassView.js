@@ -356,96 +356,67 @@ const TeacherClassView = () => {
   }, [attendanceRecords]);
 
   const handleExportAttendance = async () => {
-    setExportFeedback(null);
+  setExportFeedback(null);
 
-    if (!startDate || !endDate) {
-      setExportFeedback({
-        type: "error",
-        message: "Select a start and end date before exporting attendance.",
-      });
-      return;
-    }
+  if (!startDate || !endDate) {
+    setExportFeedback({
+      type: "error",
+      message: "Select a start and end date before exporting attendance.",
+    });
+    return;
+  }
 
-    if (new Date(startDate) > new Date(endDate)) {
-      setExportFeedback({
-        type: "error",
-        message: "The start date must be on or before the end date.",
-      });
-      return;
-    }
+  if (new Date(startDate) > new Date(endDate)) {
+    setExportFeedback({
+      type: "error",
+      message: "The start date must be on or before the end date.",
+    });
+    return;
+  }
 
-    const user = auth.currentUser;
-    if (!user) {
-      setExportFeedback({
-        type: "error",
-        message: "You must be signed in as a teacher to export attendance records.",
-      });
-      return;
-    }
+  const user = auth.currentUser;
+  if (!user) {
+    setExportFeedback({
+      type: "error",
+      message: "You must be signed in as a teacher to export attendance records.",
+    });
+    return;
+  }
 
-    setIsExporting(true);
+  setIsExporting(true);
 
-    try {
-      const idToken = await user.getIdToken();
-      const url = new URL(EXPORT_ATTENDANCE_ENDPOINT);
-      url.searchParams.set("classId", classId);
-      url.searchParams.set("startDate", startDate);
-      url.searchParams.set("endDate", endDate);
+  try {
+    // Build the same URL you pasted manually
+    const url = new URL(EXPORT_ATTENDANCE_ENDPOINT);
+    url.searchParams.set("classId", classId);
+    url.searchParams.set("startDate", startDate);
+    url.searchParams.set("endDate", endDate);
 
-      const response = await fetch(url.toString(), {
-        headers: { Authorization: `Bearer ${idToken}` },
-      });
+    // Let the browser handle the download directly (no fetch, no Authorization header)
+    const link = document.createElement("a");
+    link.href = url.toString();
+    link.download = ""; // backend's Content-Disposition will set the filename
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
-      if (!response.ok) {
-        let errorMessage = "Unable to export attendance. Please try again later.";
-        try {
-          const data = await response.json();
-          if (data?.message) errorMessage = data.message;
-        } catch {
-          try {
-            const text = await response.text();
-            if (text) errorMessage = text;
-          } catch {
-            /* ignore */
-          }
-        }
-        setExportFeedback({ type: "error", message: errorMessage });
-        return;
-      }
+    setExportFeedback({
+      type: "success",
+      message:
+        "Attendance export started. Check your downloads folder for the CSV file.",
+    });
+  } catch (error) {
+    console.error("Attendance export failed:", error);
+    setExportFeedback({
+      type: "error",
+      message:
+        "We couldn't export attendance right now. Please verify your connection and try again.",
+    });
+  } finally {
+    setIsExporting(false);
+  }
+};
 
-      const blob = await response.blob();
-      const downloadUrl = window.URL.createObjectURL(blob);
-
-      let filename = `attendance-${classId}-${startDate}-to-${endDate}.csv`;
-      const contentDisposition = response.headers.get("Content-Disposition");
-      if (contentDisposition) {
-        const match = contentDisposition.match(/filename="?([^";]+)"?/);
-        if (match?.[1]) filename = match[1];
-      }
-
-      const link = document.createElement("a");
-      link.href = downloadUrl;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(downloadUrl);
-
-      setExportFeedback({
-        type: "success",
-        message: "Attendance export complete. Check your downloads folder for the CSV file.",
-      });
-    } catch (error) {
-      console.error("Attendance export failed:", error);
-      setExportFeedback({
-        type: "error",
-        message:
-          "We couldn't export attendance right now. Please verify your connection and try again.",
-      });
-    } finally {
-      setIsExporting(false);
-    }
-  };
 
   return (
     <TeacherLayout title={classId ? `${classId} Overview` : "Class Overview"}>
