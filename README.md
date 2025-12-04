@@ -43,7 +43,7 @@ An end‑to‑end web application that automates classroom attendance using faci
 
 ### Clone & Bootstrap
 ```bash
-git clone https://github.com/bstep0/FRAS.git
+git clone https://github.com/bstep0/AttendU.git
 cd face-attendance
 ```
 
