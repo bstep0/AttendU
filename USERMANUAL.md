@@ -1,11 +1,11 @@
-# <span style="color:#00853E;">Facial Recognition Attendance System (FRAS) – User Manual</span>
+# <span style="color:#00853E;">AttendU – User Manual</span>
 
 **Team:** Group 3  
 **Date:** October 25th, 2025  
 **Version:** 1.0
 &nbsp;
 ## <span style="color:#00853E;"> Introduction</span>
-Our Facial Recognition Attendance System (FRAS) is a web application that we’ve designed to make the attendance-taking process more efficient. It uses facial recognition to identify and verify a student, then accurately records their attendance in real time. The system provides intuitive and functional dashboards for students, instructors, and administrators.  
+AttendU is a web application that we’ve designed to make the attendance-taking process more efficient. It uses facial recognition to identify and verify a student, then accurately records their attendance in real time. The system provides intuitive and functional dashboards for students, instructors, and administrators.  
 
 **Why it’s useful:**
 - Saves time by removing manual roll calls  
@@ -44,11 +44,11 @@ Our Facial Recognition Attendance System (FRAS) is a web application that we’v
 - After successfully logging in you'll be directed to the Administrator Dashboard.   
 &nbsp;
 
-<img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/LoginPage.png?raw=true" alt="Login Page" height="250" width="auto">
+<img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/LoginPage.png?raw=true" alt="Login Page" height="250" width="auto">
 
-<img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/StudentDashboard.png?raw=true" alt="Student Dashboard" height="250" width="auto">
+<img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/StudentDashboard.png?raw=true" alt="Student Dashboard" height="250" width="auto">
 
-<img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/InstructorDashboard.png?raw=true" alt="Instructor Dashboard" height="250" width="auto">
+<img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/InstructorDashboard.png?raw=true" alt="Instructor Dashboard" height="250" width="auto">
 
 &nbsp;
 ## <span style="color:#00853E;"> Features and Functions</span>
@@ -74,53 +74,53 @@ Each user role—Student, Instructor, and Administrator—has its own unique wor
 &nbsp;
 ### <span style="color:#00853E;">Student Workflow</span>
 
-Students will primarily use FRAS to record their attendance and view their individual attendance history.
+Students will primarily use AttendU to record their attendance and view their individual attendance history.
 
 #### Key Features for Students
-- **Login to FRAS**
-   - Visit the FRAS web portal and sign in using your UNT or provided credentials.  
+- **Login to AttendU**
+   - Visit the AttendU web portal and sign in using your UNT or provided credentials.  
    - Grant permission for camera access when prompted.
-<img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/LoginPage.png?raw=true" alt="Login Page" height="250" width="auto">
+<img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/LoginPage.png?raw=true" alt="Login Page" height="250" width="auto">
 
 - **Facial Recognition Check-In**
    - Select "Start Scan" on Student Dashboard
-   <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/StudentStartScan.png?raw=true" alt="Start Scan" height="auto" width="auto">
+   <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/StudentStartScan.png?raw=true" alt="Start Scan" height="auto" width="auto">
 
    - Select a class from the dropdown menu.
 
-      <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/StudentSelectAClass.png?raw=true" alt="Select a Class" height="auto" width="auto">
+      <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/StudentSelectAClass.png?raw=true" alt="Select a Class" height="auto" width="auto">
    - Look directly into the camera and hit "Capture Face".
 
-      <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/StudentCaptureFace.png?raw=true" alt="Capture Face" height="250" width="auto">
+      <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/StudentCaptureFace.png?raw=true" alt="Capture Face" height="250" width="auto">
 
    - The system scans and verifies your identity in real time.  
    - If successful, a confirmation message appears.
 - **View Attendance History**
    - Navigate to the "My Classes" page and select a class from the list using the "View Class" button..
-   <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/StudentMyClassesPage.png?raw=true" alt="My Classes Page" height="250" width="auto">
+   <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/StudentMyClassesPage.png?raw=true" alt="My Classes Page" height="250" width="auto">
 
    - Check class attendance records for the selected class.
-   <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/StudentClassView.png?raw=true" alt="Class View Page" height="250" width="auto">
+   <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/StudentClassView.png?raw=true" alt="Class View Page" height="250" width="auto">
 &nbsp;
 ### <span style="color:#00853E;">Instructor Workflow</span>
 
 Instructors oversee attendance for their classes, modify attendance records, and export reports.
 
 #### Key Features for Instructors
-- **Login to FRAS**
+- **Login to AttendU**
    - Sign in using your instructor credentials.
-   <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/LoginPage.png?raw=true" alt="Login Page" height="250" width="auto">
+   <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/LoginPage.png?raw=true" alt="Login Page" height="250" width="auto">
    
    - After login, you will be directed to the Instructor Dashboard.
-   <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/InstructorDashboard.png?raw=true" alt="Instructor Dashboard" height="250" width="auto">
+   <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/InstructorDashboard.png?raw=true" alt="Instructor Dashboard" height="250" width="auto">
    
 
 - **View Individual Class Attendance**
    - Navigate to the "My Classes Page" from the dashboard.
-   <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/InstructorMyClasses.png?raw=true" alt="Instructor My Classes" height="250" width="auto">
+   <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/InstructorMyClasses.png?raw=true" alt="Instructor My Classes" height="250" width="auto">
 
    - Select a class from the class list using the "View Class" button.
-   <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/InstructorSelectClass.png?raw=true" alt="Instructor Dashboard" height="250" width="auto">
+   <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/InstructorSelectClass.png?raw=true" alt="Instructor Dashboard" height="250" width="auto">
 
 - **Manual Attendance Edits**
    - Click a student name to override attendance.
@@ -128,7 +128,7 @@ Instructors oversee attendance for their classes, modify attendance records, and
    - Choose the new attendance status.
    - Add an optional reason for edit.
 
-      <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/InstructorModify.png?raw=true" alt="Modify Attendance" height="250" width="auto">  
+      <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/InstructorModify.png?raw=true" alt="Modify Attendance" height="250" width="auto">  
 
 - **Export Attendance Reports**
    - Navigate to a class view page.
@@ -136,15 +136,15 @@ Instructors oversee attendance for their classes, modify attendance records, and
    - Select a start date and an end date from the filter options. 
    - Click the "Export Attendance" button.  
 
-      <img src="https://github.com/bstep0/FRAS/blob/main/Images%20for%20User%20Manual/InstructorExport.png?raw=true" alt="Export Attendance" height="auto" width="auto">
+      <img src="https://github.com/bstep0/AttendU/blob/main/Images%20for%20User%20Manual/InstructorExport.png?raw=true" alt="Export Attendance" height="auto" width="auto">
 &nbsp;
 ### <span style="color:#00853E;">Administrator Workflows</span>
 
-Administrators manage users and classes within FRAS.  
+Administrators manage users and classes within AttendU.  
 
 #### Key Features for Administrators
 
-- **Login to FRAS**  
+- **Login to AttendU**  
    - Sign in using your administrator credentials.  
    - After login, you will be directed to the Admin Dashboard.
 - **Add a New User**  
@@ -179,7 +179,7 @@ Administrators manage users and classes within FRAS.
 &nbsp;
 ## <span style="color:#00853E;">Troubleshooting</span>
 
-If you run into issues while using our Facial Recognition Attendance System (FRAS), use this troubleshooting guide to quickly identify and resolve common problems. Each issue includes the likely cause and a recommended solution.
+If you run into issues while using our Facial Recognition Attendance System (AttendU), use this troubleshooting guide to quickly identify and resolve common problems. Each issue includes the likely cause and a recommended solution.
 &nbsp;
 ### <span style="color:#00853E;">Quick Fix Checklist</span>
 
@@ -198,9 +198,9 @@ Before diving into the detailed fixes, try these steps first:
 | **Issue** | **Possible Cause** | **Recommended Solution** |
 |------------|--------------------|----------------------------|
 | **Camera not detected** | Browser permissions are blocked | In Chrome, click the "tune" in the address bar → Camera → Allow Toggle → refresh the page. |
-| **Camera already in use** | Another app or browser tab is already using your webcam | Close other tabs or programs (Zoom, Teams, etc.), then reload FRAS. |
+| **Camera already in use** | Another app or browser tab is already using your webcam | Close other tabs or programs (Zoom, Teams, etc.), then reload AttendU. |
 | **Face not recognized** | Poor lighting, camera angle, or camera view obstruction | Sit facing the light source, remove hats/masks/face coverings, and clean the camera lens. |
-| **Low recognition accuracy** | Outdated or unclear profile photo | Ask an administrator to update your reference photo in FRAS. |
+| **Low recognition accuracy** | Outdated or unclear profile photo | Ask an administrator to update your reference photo in AttendU. |
 | **Page freezes or loads slowly** | Weak Wi-Fi connection or high CPU usage | Switch to a stronger network and close unused programs/tabs. |
 | **Attendance not showing up** | Recognition timeout or sync delay | Wait a few minutes, refresh the dashboard, or ask your instructor to verify your attendance records. |
 | **Login error / Invalid credentials** | Typo, expired session, or account mismatch | Re-enter credentials carefully, reset your password through UNT’s portal, or contact support. |
@@ -214,7 +214,7 @@ Before diving into the detailed fixes, try these steps first:
 #### Browser Settings
 - **Chrome / Edge:** Click the tune icon in the address bar → Camera → Allow Access
 - **Firefox:** Go to Settings → Privacy & Security → Permissions → Camera → allow Access   
-- **Safari (macOS):** Safari → Settings → Websites → Camera** → set FRAS to Allow
+- **Safari (macOS):** Safari → Settings → Websites → Camera** → set AttendU to Allow
 
 #### Operating System Settings
 - **Windows 10/11:**  
@@ -228,7 +228,7 @@ Before diving into the detailed fixes, try these steps first:
 |--------------|--------------------|---------------|
 | **Slow load times or lag** | Weak network / VPN interference | Connect to a stable Wi-Fi network, disable VPN, refresh the page. |
 | **Frequent disconnects** | Browser timeout / unstable internet | Move closer to your router or access point, or switch to a wired Ethernet connection. |
-| **Web app not loading** | Browser cache or outdated version | Clear browser cache, close all FRAS tabs, reopen in incognito mode. |  
+| **Web app not loading** | Browser cache or outdated version | Clear browser cache, close all AttendU tabs, reopen in incognito mode. |  
 
 &nbsp;
 ### <span style="color:#00853E;">Attendance Syncing</span>
@@ -262,21 +262,21 @@ Before diving into the detailed fixes, try these steps first:
 |--------------|--------------------|---------------|
 | **Recognition failed** | Poor lighting or camera angle | Re-scan in better lighting or adjust position. |
 | **Wrong name displayed** | Database mismatch | Notify instructor or admin to verify your user profile. |
-| **Forgot password** | UNT login issue | Reset password via UNT account portal, then re-sign into FRAS. |  
+| **Forgot password** | UNT login issue | Reset password via UNT account portal, then re-sign into AttendU. |  
 
 &nbsp;
 ### <span style="color:#00853E;">Administrator Diagnostics</span>
 
 **If multiple users report ongoing issues:**
 
-1. **Check site status:** Confirm FRAS site loads correctly on another device or browser.  
+1. **Check site status:** Confirm AttendU site loads correctly on another device or browser.  
 2. **Verify database:** Open Firebase → Firestore Rules & Usage → look for recent write errors.  
 3. **Authentication:** Confirm affected users exist in Firebase Authentication and have correct roles.  
 4. **Test Firestore connectivity:** Try reading/writing a small test document.
 5. **Review server logs:** Look for network or CORS errors blocking connections.  
 6. **Check hosting uptime:** Verify Render/Firebase Hosting status pages for outages.  
 
-If critical services fail, contact **FRAS Support** (see Contact Information section).  
+If critical services fail, contact **AttendU Support** (see Contact Information section).  
 &nbsp;
 ### <span style="color:#00853E;">Preventive Tips</span>
 
@@ -290,7 +290,7 @@ If critical services fail, contact **FRAS Support** (see Contact Information sec
 ## <span style="color:#00853E;"> FAQ</span>
 
 **Q: I forgot my password. Can I change it?**   
-**A:** If you happen to forget your password, please reset your password through UNT's account management system. Once you reset your password, you can log back into the FRAS system using your new credentials.
+**A:** If you happen to forget your password, please reset your password through UNT's account management system. Once you reset your password, you can log back into the AttendU system using your new credentials.
 
 **Q: Can I use my phone’s camera?**   
 **A:** Yes, if your mobile browser supports it — though we recommend using desktop webcams are more reliable. At this point in time, our user interface is built for desktop and may not be easily viewable on mobile devices.
@@ -301,25 +301,25 @@ If critical services fail, contact **FRAS Support** (see Contact Information sec
 **Q: What happens if multiple students appear at once?**   
 **A:** The system will reject the scan and the student will need to fill the camera.  
 
-**Q: What do I do if FRAS doesn't recognize my face?**   
-**A:** If your facial scan fails, please ensure that you are attempting your scan in a well-lit enviroment. Please avoid wearing hats in the process, or anything face coverings. If the issues continues, inform your instructor and they can manually mark your attendance as present. If the issue persist, please contact support at UNT.FRAS@gmail.com.
+**Q: What do I do if AttendU doesn't recognize my face?**   
+**A:** If your facial scan fails, please ensure that you are attempting your scan in a well-lit enviroment. Please avoid wearing hats in the process, or anything face coverings. If the issues continues, inform your instructor and they can manually mark your attendance as present. If the issue persist, please contact support at UNT.AttendU@gmail.com.
 
 **Q: How is my data stored?**  
 **A:** All attendance data is encrypted and securely stored in Firebase Firestore.
 
 **Q: Is my camera feed stored?**   
-**A:** No. FRAS handles facial data in real time, but does not store any video footage or camera images. Once a scan is processed, all data collected from that scan is deleted.
+**A:** No. AttendU handles facial data in real time, but does not store any video footage or camera images. Once a scan is processed, all data collected from that scan is deleted.
 
 **Q: Who can I contact if I see an issue in my attendance records?**   
-**A:** Please contact your instructor if you see an error in your attendance records. They can view your attendance records and correct any issues directly. If the issue is a system error, please contact support at UNT.FRAS@gmail.com. 
+**A:** Please contact your instructor if you see an error in your attendance records. They can view your attendance records and correct any issues directly. If the issue is a system error, please contact support at UNT.AttendU@gmail.com. 
 
 **Q: Can I upload a new image?**   
-**A:** You cannot upload an image yourself. If you like to upload a new image, please contact support at UNT.FRAS@gmail.com.
+**A:** You cannot upload an image yourself. If you like to upload a new image, please contact support at UNT.AttendU@gmail.com.
 
 **Q: How do I report a bug or technical issue?**   
-**A:** Please attempt to capture or screenshot the problem you are experiencing and email it to UNT.FRAS@gmail.com, along with a description of the problem. Also include any important information related to the problem such as your role, the browser you are using, and the hardware you are using. 
+**A:** Please attempt to capture or screenshot the problem you are experiencing and email it to UNT.AttendU@gmail.com, along with a description of the problem. Also include any important information related to the problem such as your role, the browser you are using, and the hardware you are using. 
 &nbsp;
 ## <span style="color:#00853E;"> Contact Information</span>
 For help or technical support, contact:  
 
-**Group 3 – FRAS Support  @** UNT.FRAS@gmail.com 
+**Group 3 – AttendU Support  @** UNT.AttendU@gmail.com 
