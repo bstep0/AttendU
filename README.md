@@ -1,5 +1,5 @@
 
-# Facial Recognition Attendance System
+# AttendU - Facial Recognition Attendance System
 
 An end‑to‑end web application that automates classroom attendance using facial recognition.
 
